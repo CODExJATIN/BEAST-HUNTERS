@@ -6,6 +6,10 @@
 
 Beast Hunters is an engaging role-playing game (RPG) that immerses players in a world filled with mystical creatures and epic battles. Face off against slimes, fanged beasts, and a formidable dragon to save a town held captive by a draconic threat.
 
+[![Play](https://img.shields.io/badge/Play-Click%20Here-blue?style=for-the-badge&logo=appveyor)](https://www.example.com)
+
+
+
 ## Features
 
 - **Diverse Enemies:** Encounter and battle a variety of creatures, including slimes, fanged beasts, and a menacing dragon.
