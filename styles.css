@@ -1,10 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Honk&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Protest+Strike&family=Teko:wght@300..700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Honk&display=swap');
+
 
 body{
     background-color: #0a0a23;
+    height: 100vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family:"Josefin Sans",sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.upperScreen{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    
+
+}
+
+.myInventory{
+    animation: popOut 0.5s ease-in-out;
+    width: 200px;
+    background-color: #feac32;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    font-size: 20px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    
+
+    border-radius: 50px;
+
+  
+
+    font-family: "Honk", sans-serif;
+
+
+}
+
+.logoImage{
+    
+    width: 100%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+.weapon{
+    height: 80px;
+    width: 80px;
+    border-radius: 5px;
+   
+}
+
+#weaponImages{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;;
+}
+
+.myStats{
+    animation: popOut 0.5s ease-in-out;
+    font-family: "Honk", sans-serif;
+    background-color: #feac32;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-radius: 50px;
+
+    font-size: 20px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    height:80vh;
+    width:200px;
+
+    
+}
+.mainScreen{
+    height: 60vh;
+    background-color: #0a0a23;
     background-image: url(scenes/Opening.jpg);
     background-size:cover;
+    border-radius: 10px;
+   
 }
 
 #text{
@@ -15,11 +113,12 @@ body{
 }
 
 #game{
-    max-width: 500px;
-    max-height: 400px;
+    /*max-width: 500px;
+    max-height: 400px;*/
+    width: 100%;
     background-color: #ffffff;
     color: #ffffff;
-    margin-top: 75vh;
+    margin-top: 10px;
     margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
@@ -31,6 +130,18 @@ body{
     border:1px solid #0a0a23;
     color: #0a0a23;
     padding: 5px;
+    
+    
+}
+
+#button1{
+    font-family:"Josefin Sans",sans-serif;
+}
+#button2{
+    font-family:"Josefin Sans",sans-serif;
+}
+#button3{
+    font-family:"Josefin Sans",sans-serif;
 }
 
 #monsterStats{
@@ -52,3 +163,72 @@ button{
     background-image: linear-gradient(#fecc4c,#ffac33);
     border: 3px solid #feac32;
 }
+
+.black-and-white{
+    filter: grayscale(100%);
+    transition: filter 0.5s ease-in-out;
+}
+
+.normal{
+    filter: grayscale(0%);
+    transition: filter 0.5s ease-in-out;
+    animation: popOut 0.5s ease-in-out;
+}
+
+.statText{
+    font-size: 35px;
+    animation: popOut 0.5s ease-in-out;
+}
+
+.popAnimation{
+    animation: popOut 0.5s ease-in-out;
+}
+
+.hide{
+    display: none;
+}
+
+.bgImage{
+    margin: 0;
+    padding: 0;
+    background-image: url('scenes/Opening.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    
+}
+
+#play{
+
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+    width: 180px;
+    height: 60px;
+    font-family: 'Honk',sans-serif;
+    font-size: 40px;
+}
+
+#play:hover{
+    background-color: #b16b02;
+}
+
+@keyframes popOut {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
+
+

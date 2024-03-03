@@ -6,28 +6,81 @@
     <title>Beast Hunters</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-   <div id="game">
-    <div id="stats">
-        <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
-        <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
-        <span class="stat">Gold: <strong>
-            <span id="goldText">50</span>
-        </strong></span>
+<body >
+
+    <div class="bgImage" id="bg">
+        
     </div>
-    <div id="controls">
-        <button id="button1">Go to store</button>
-        <button id="button2">Go to cave</button>
-        <button id="button3">Fight dragon</button>
+    <button id="play">PLAY</button>
+
+    
+
+    <div class="upperScreen hide" id="upperScreen">
+
+        <div class="myInventory">
+            <h1 style="color:#c70d0d">Inventory</h1>
+            <div id="weaponImages">
+                <div class="logoImage" id="stick">
+                    <img class="weapon" src="weapons/stick.jpeg" alt="stick"><p>Stick</p>
+                </div>
+                
+                <div class="logoImage black-and-white" id="dagger">
+                    <img class="weapon " src="weapons/dagger.jpeg" alt="stick"><p>Dagger</p>
+                </div>
+
+                <div class="logoImage black-and-white" id="hammer">
+                    <img class="weapon" src="weapons/hammer.jpeg" alt="stick"><p>Hammer</p>
+                </div>
+                
+                <div class="logoImage black-and-white" id="sword">
+                    <img class="weapon" src="weapons/sword.jpeg" alt="stick"><p>Sword</p>
+                </div>
+                
+            </div>
+        </div>
+        <div style="width: 50%;">
+            <div class="mainScreen"></div>
+            <div id="game">
+                <!---<div id="stats">
+                    <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
+                    <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
+                    <span class="stat">Gold: <strong>
+                        <span id="goldText">50</span>
+                    </strong></span>
+                </div>--->
+                <div id="controls">
+                    <button id="button1">Go to store</button>
+                    <button id="button2">Go to cave</button>
+                    <button id="button3">Fight dragon</button>
+                </div>
+                <div id="monsterStats">
+                    <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
+                    <span class="stat">Health: <strong><span id="monsterHealth"></span>
+                </div>
+                <div id="text">
+                    Welcome to Beast Hunters:Beyond the Dragon's reach. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.
+                </div>
+               </div> 
+        </div>
+        
+
+        <div class="myStats">
+            <h1>Stats</h1>
+            <div class="statText">
+                <p>XP: <strong><span id="xpText">0</span></strong></p>
+                <p>Health: <strong><span id="healthText">100</span></strong> </p>
+                <p>Gold: <strong>
+                    <span id="goldText">50</span>
+                </strong> </p>
+            </div>
+                
+
+            <div id="text"></div>
+        </div>
+        
     </div>
-    <div id="monsterStats">
-        <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
-        <span class="stat">Health: <strong><span id="monsterHealth"></span>
-    </div>
-    <div id="text">
-        Welcome to Beast Hunters:Beyond the Dragon's reach. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.
-    </div>
-   </div> 
+    
+   
 
    <script src="script.js"></script>
 </body>
