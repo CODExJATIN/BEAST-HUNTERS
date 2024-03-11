@@ -1,6 +1,6 @@
 # Beast Hunters
 
-<img height="360px" src="https://i.ibb.co/0KPznck/20240131-181511-363.jpg">
+<img height="200px" src="https://i.ibb.co/0KPznck/20240131-181511-363.jpg">
 
 
 
