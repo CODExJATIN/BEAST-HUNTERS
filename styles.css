@@ -231,4 +231,42 @@ button{
     }
 }
 
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
 
+
+
+#popupContent {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 8px;
+    z-index: 1001;
+}
+
+#popupContent h2{
+    color:#fecc4c;
+}
+
+.popupImage {
+    width: 100%;
+    max-width: 300px; 
+    border-radius: 15px; 
+    margin-top: 20px; 
+}
+
+
+.blur {
+    filter: blur(5px);
+}

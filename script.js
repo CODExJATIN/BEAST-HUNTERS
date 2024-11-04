@@ -394,3 +394,23 @@ document.getElementById('play').addEventListener('mouseout',()=>{
   bg.classList.add('basic');
   bg.classList.remove('black-and-white');
 })
+
+
+function togglePopup() {
+  const popup = document.getElementById("popup");
+  const mainContent = document.querySelector("#bg");
+  
+
+  if (window.innerWidth <= 768) {
+      popup.style.display = "flex";
+      mainContent.classList.add("blur");
+      playBtn.classList.add("blur");
+  } else {
+      popup.style.display = "none";
+      mainContent.classList.remove("blur");
+      playBtn.classList.remove("blur");
+  }
+}
+
+window.onload = togglePopup;
+window.addEventListener("resize", togglePopup);
