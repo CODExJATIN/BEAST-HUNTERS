@@ -26,9 +26,9 @@ Thank you for considering contributing to **BEAST HUNTERS**! Your help is greatl
 ### Issue 2: Locked Weapons After Restart
 <img src="https://i.ibb.co/VCgnDkp/Screenshot-192.png" alt="Screenshot-192" border="0" />
 
-- **Description:** After a player dies and the game restarts, all previously unlocked weapons appear locked again in the UI.
-- **Expected Behavior:** Previously unlocked weapons should remain unlocked after restarting the game.
-- **Task:** Ensure the weapon unlock state persists correctly across game restarts.
+- **Description:** After a player dies and the game restarts, all previously unlocked weapons remain unlocked in the UI.
+- **Expected Behavior:** All weapons, except the default stick, should be locked again after restarting the game.
+- **Task:** Ensure the weapon unlock state resets correctly upon game restart, with only the default stick remaining unlocked.
 
 ---
 
