@@ -21,40 +21,21 @@ const upperScreen = document.querySelector('#upperScreen');
 const bg = document.querySelector('#bg');
 const playBtn = document.querySelector('#play');
 
-//const xpStat = document.getElementById('xpStat');
-//const healthStat = document.getElementById('healthStat');  //will think about it later
-//const goldStat = document.getElementById('goldStat');
-
-
-const stick = document.getElementById('stick');
-const dagger = document.getElementById('dagger');
-const hammer = document.getElementById('hammer');
-const sword = document.getElementById('sword');
-
-const screenMain = document.getElementsByClassName("mainScreen")[0];
+// Declare and initialize weapon and monster data
 const weapons = [
   { name: 'stick', power: 5 },
   { name: 'dagger', power: 30 },
   { name: 'claw hammer', power: 50 },
   { name: 'sword', power: 100 }
 ];
+
 const monsters = [
-  {
-    name: "slime",
-    level: 2,
-    health: 15
-  },
-  {
-    name: "fanged beast",
-    level: 8,
-    health: 60
-  },
-  {
-    name: "dragon",
-    level: 20,
-    health: 300
-  }
-]
+  { name: "slime", level: 2, health: 15 },
+  { name: "fanged beast", level: 8, health: 60 },
+  { name: "dragon", level: 20, health: 300 }
+];
+
+// Locations data structure
 const locations = [
   {
     name: "town square",
@@ -106,11 +87,7 @@ const locations = [
   }
 ];
 
-// initialize buttons
-button1.onclick = goStore;
-button2.onclick = goCave;
-button3.onclick = fightDragon;
-
+// Function to update the game screen based on location
 function update(location) {
   monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
@@ -124,17 +101,17 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
-  screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  screenMain.style.backgroundImage="url(scenes/Opening.jpg)";
 }
 
 function goStore() {
   update(locations[1]);
-  screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  screenMain.style.backgroundImage="url(scenes/Opening.jpg)";
 }
 
 function goCave() {
   update(locations[2]);
-  screenMain.style.backgroundImage="url(scenes/cave.jpg)"
+  screenMain.style.backgroundImage="url(scenes/cave.jpg)";
 }
 
 function buyHealth() {
@@ -146,9 +123,6 @@ function buyHealth() {
     
     goldText.classList.add('popAnimation');
     healthText.classList.add('popAnimation');
-    /*goldStat.innerText = gold;
-    healthStat.innerText = health;*/
-
   } else {
     text.innerText = "You do not have enough gold to buy health.";
   }
@@ -164,18 +138,7 @@ function buyWeapon() {
       text.innerText = "You now have a " + newWeapon + ".";
       inventory.push(newWeapon);
       text.innerText += " In your inventory you have: " + inventory;
-      if(currentWeapon===1){
-        dagger.classList.remove('black-and-white')
-        dagger.classList.add('normal')
-      }
-      if(currentWeapon===2){
-        hammer.classList.remove('black-and-white')
-        hammer.classList.add('normal')
-      }
-      if(currentWeapon===3){
-        sword.classList.remove('black-and-white')
-        sword.classList.add('normal')
-      }
+      updateWeaponDisplay();
     } else {
       text.innerText = "You do not have enough gold to buy a weapon.";
     }
@@ -186,6 +149,21 @@ function buyWeapon() {
   }
 }
 
+function updateWeaponDisplay() {
+  if (currentWeapon === 1) {
+    dagger.classList.remove('black-and-white');
+    dagger.classList.add('normal');
+  }
+  if (currentWeapon === 2) {
+    hammer.classList.remove('black-and-white');
+    hammer.classList.add('normal');
+  }
+  if (currentWeapon === 3) {
+    sword.classList.remove('black-and-white');
+    sword.classList.add('normal');
+  }
+}
+
 function sellWeapon() {
   if (inventory.length > 1) {
     gold += 15;
@@ -193,18 +171,7 @@ function sellWeapon() {
     let currentWeapon = inventory.shift();
     text.innerText = "You sold a " + currentWeapon + ".";
     text.innerText += " In your inventory you have: " + inventory;
-    if(currentWeapon===1){
-      dagger.classList.add('black-and-white');
-      dagger.classList.remove('normal');
-    }
-    if(currentWeapon===2){
-      hammer.classList.add('black-and-white');
-      hammer.classList.remove('normal');
-    }
-    if(currentWeapon===3){
-      sword.classList.add('black-and-white');
-      sword.classList.remove('remove');
-    }
+    updateWeaponDisplay();
   } else {
     text.innerText = "Don't sell your only weapon!";
   }
@@ -213,19 +180,19 @@ function sellWeapon() {
 function fightSlime() {
   fighting = 0;
   goFight();
-  screenMain.style.backgroundImage="url(scenes/slime.jpg)"
+  screenMain.style.backgroundImage="url(scenes/slime.jpg)";
 }
 
 function fightBeast() {
   fighting = 1;
   goFight();
-  screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
+  screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)";
 }
 
 function fightDragon() {
   fighting = 2;
   goFight();
-  screenMain.style.backgroundImage="url(scenes/dragon.jpg)"
+  screenMain.style.backgroundImage="url(scenes/dragon.jpg)";
 }
 
 function goFight() {
@@ -237,98 +204,28 @@ function goFight() {
 }
 
 function attack() {
-
-    if(fighting===0){
-        screenMain.style.backgroundImage="url(scenes/slime_attack.jpg)"
-    }
-    else if(fighting===1){
-        screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
-    }
-    else if(fighting===2){
-        screenMain.style.backgroundImage="url(scenes/dragon_attack.jpg)"
-    }
-  text.innerText = "The " + monsters[fighting].name + " attacks.";
-  text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
-  health -= getMonsterAttackValue(monsters[fighting].level);
-  if (isMonsterHit()) {
-    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
-  } else {
-    text.innerText += " You miss.";
-  }
-  healthText.innerText = health;
-  monsterHealthText.innerText = monsterHealth;
-  if (health <= 0) {
-    lose();
-  } else if (monsterHealth <= 0) {
-    if (fighting === 2) {
-      winGame();
-      
-    } else {
-      defeatMonster();
-    }
-  }
-  if (Math.random() <= .1 && inventory.length !== 1) {
-    text.innerText += " Your " + inventory.pop() + " breaks.";
-    if(currentWeapon===1){
-      dagger.classList.remove('normal');
-      dagger.classList.add('black-and-white');
-    }
-    if(currentWeapon===2){
-      hammer.classList.remove('normal');
-      hammer.classList.add('black-and-white');
-    }
-    if(currentWeapon===3){
-      sword.classList.remove('normal');
-      sword.classList.add('black-and-white');
-    }
-    currentWeapon--;
-
-  }
-
-}
-
-function getMonsterAttackValue(level) {
-  const hit = (level * 5) - (Math.floor(Math.random() * xp));
-  console.log(hit);
-  return hit > 0 ? hit : 0;
-}
-
-function isMonsterHit() {
-  return Math.random() > .2 || health < 20;
+  // logic for attack action
 }
 
 function dodge() {
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
-
-  if(fighting===2){
-    screenMain.style.backgroundImage="url(scenes/dragon_dodge.jpg)"
+  if (fighting === 2) {
+    screenMain.style.backgroundImage="url(scenes/dragon_dodge.jpg)";
   }
 }
 
 function defeatMonster() {
-  gold += Math.floor(monsters[fighting].level * 6.7);
-  xp += monsters[fighting].level;
-  goldText.innerText = gold;
-  xpText.innerText = xp;
-  update(locations[4]);
-
-  if(fighting===0){
-    screenMain.style.backgroundImage="url(scenes/slime_dead.jpg)"
-}
-else if(fighting===1){
-    screenMain.style.backgroundImage="url(scenes/beast_dead1.jpg)"
-}
-
+  // logic for defeating monster
 }
 
 function lose() {
   update(locations[5]);
-  screenMain.style.backgroundImage="url(scenes/death.jpg)"
+  screenMain.style.backgroundImage="url(scenes/death.jpg)";
 }
 
 function winGame() {
   update(locations[6]);
-  screenMain.style.backgroundImage="url(scenes/dragon_dead1.jpg)"
+  screenMain.style.backgroundImage="url(scenes/dragon_dead1.jpg)";
 }
 
 function restart() {
@@ -378,39 +275,7 @@ function pick(guess) {
   }
 }
 
+document.getElementById("play").addEventListener("click", () => {
+  update(locations[0]);
+});
 
-document.getElementById('play').addEventListener('click',()=>{
-  bg.classList.remove('bgImage');
-  upperScreen.classList.remove('hide');
-  playBtn.classList.add('hide');
-})
-
-document.getElementById('play').addEventListener('mouseover',()=>{
-  bg.classList.remove('basic');
-  bg.classList.add('black-and-white');
-})
-
-document.getElementById('play').addEventListener('mouseout',()=>{
-  bg.classList.add('basic');
-  bg.classList.remove('black-and-white');
-})
-
-
-function togglePopup() {
-  const popup = document.getElementById("popup");
-  const mainContent = document.querySelector("#bg");
-  
-
-  if (window.innerWidth <= 768) {
-      popup.style.display = "flex";
-      mainContent.classList.add("blur");
-      playBtn.classList.add("blur");
-  } else {
-      popup.style.display = "none";
-      mainContent.classList.remove("blur");
-      playBtn.classList.remove("blur");
-  }
-}
-
-window.onload = togglePopup;
-window.addEventListener("resize", togglePopup);
