@@ -414,3 +414,16 @@ function togglePopup() {
 
 window.onload = togglePopup;
 window.addEventListener("resize", togglePopup);
+
+//Buttton Sound Effect
+const buttons = document.querySelectorAll("button");
+
+
+const clickSound = new Audio("click-sound.mp3");
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        clickSound.currentTime = 0; 
+        clickSound.play(); 
+    });
+});
