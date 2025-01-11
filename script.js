@@ -88,14 +88,14 @@ const locations = [
   },
   {
     name: "lose",
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
-    "button functions": [restart, restart, restart],
+    "button text": ["REPLAY?"],
+    "button functions": [restart],
     text: "You die. ☠️"
   },
   { 
     name: "win", 
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"], 
-    "button functions": [restart, restart, restart], 
+    "button text": ["REPLAY?"], 
+    "button functions": [restart], 
     text: "You defeat the dragon! YOU WIN THE GAME! 🎉" 
   },
   {
@@ -113,14 +113,30 @@ button3.onclick = fightDragon;
 
 function update(location) {
   monsterStats.style.display = "none";
+
+  // Update button texts and functionalities
   button1.innerText = location["button text"][0];
-  button2.innerText = location["button text"][1];
-  button3.innerText = location["button text"][2];
   button1.onclick = location["button functions"][0];
-  button2.onclick = location["button functions"][1];
-  button3.onclick = location["button functions"][2];
+
+  if (location["button text"][1]) {
+    button2.style.display = "inline-block";
+    button2.innerText = location["button text"][1];
+    button2.onclick = location["button functions"][1];
+  } else {
+    button2.style.display = "none"; // Hide button if no text is provided
+  }
+
+  if (location["button text"][2]) {
+    button3.style.display = "inline-block";
+    button3.innerText = location["button text"][2];
+    button3.onclick = location["button functions"][2];
+  } else {
+    button3.style.display = "none"; // Hide button if no text is provided
+  }
+
   text.innerText = location.text;
 }
+
 
 function goTown() {
   update(locations[0]);
