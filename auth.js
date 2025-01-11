@@ -129,14 +129,14 @@ function updateUI(user) {
 
         // Update user profile details
         displayUsername.textContent = user.displayName || user.email;
-        userAvatar.src = user.photoURL || "path/to/default-avatar.png";
+        userAvatar.src = user.photoURL || "beast-hunter-user.jpg";
     }
 }
 
 // Reset UI on logout
 function resetUI() {
     displayUsername.textContent = "";
-    userAvatar.src = "path/to/default-avatar.png";
+    userAvatar.src = "beast-hunter-user.jpg";
     userInfo?.classList.add("hide");
     authModal?.classList.remove("hide");
 }
