@@ -5,8 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beast Hunters</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 </head>
-<body >
+<body>
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <img src="logo.jpg" alt="Beast Hunters Logo" class="auth-logo">
+                    <h2>Welcome to Beast Hunters</h2>
+                    <p>Begin your epic journey</p>
+                </div>
+
+                <div id="loginForm">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    <button id="loginBtn" class="auth-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button id="registerBtn" class="auth-btn register">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    <button id="googleBtn" class="auth-btn google">
+                        <img src="https://www.google.com/favicon.ico" alt="Google" class="google-icon">
+                        Continue with Google
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Selection Modal -->
+    <div id="characterModal" class="modal hide">
+        <div class="modal-content character-modal">
+            <div class="character-header">
+                <h2>Choose Your Champion</h2>
+                <p>Select your character to begin the adventure</p>
+            </div>
+            
+            <div class="character-grid">
+                <div class="character-option" data-character="warrior">
+                    <div class="character-card">
+                        <img src="characters/warrior.gif" alt="Warrior">
+                        <div class="character-info">
+                            <h3>Warrior</h3>
+                            <p>Master of close combat</p>
+                            <ul class="character-stats">
+                                <li><i class="fas fa-heart"></i> Health: 120</li>
+                                <li><i class="fas fa-fist-raised"></i> Strength: 85</li>
+                                <li><i class="fas fa-shield-alt"></i> Defense: 75</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="character-option" data-character="mage">
+                    <div class="character-card">
+                        <img src="characters/mage.gif" alt="Mage">
+                        <div class="character-info">
+                            <h3>Mage</h3>
+                            <p>Wielder of arcane powers</p>
+                            <ul class="character-stats">
+                                <li><i class="fas fa-heart"></i> Health: 80</li>
+                                <li><i class="fas fa-magic"></i> Magic: 95</li>
+                                <li><i class="fas fa-shield-alt"></i> Defense: 60</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="character-option" data-character="archer">
+                    <div class="character-card">
+                        <img src="characters/archer.gif" alt="Archer">
+                        <div class="character-info">
+                            <h3>Archer</h3>
+                            <p>Master of ranged combat</p>
+                            <ul class="character-stats">
+                                <li><i class="fas fa-heart"></i> Health: 90</li>
+                                <li><i class="fas fa-bullseye"></i> Accuracy: 90</li>
+                                <li><i class="fas fa-shield-alt"></i> Defense: 65</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="confirmCharacter" class="auth-btn">Begin Adventure</button>
+        </div>
+    </div>
+
+    <!-- User Info Bar -->
+    <div id="userInfo" class="hide">
+        <div class="user-profile">
+            <img id="userAvatar" src="user_placeholder.png" alt="User Avatar" class="user-avatar">
+            <span id="displayUsername"></span>
+        </div>
+        <div class="user-actions">
+            <button id="editUsernameBtn" class="icon-btn">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button id="logout" class="icon-btn">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </div>
 
     <div class="bgImage" id="bg">
         
@@ -93,8 +203,12 @@
         </div>
     </div>
     
-   
+    
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="firebase-app.js"></script>
+    <script type="module" src="firebase-auth.js"></script>
+    <script type="module" src="firebase-database.js"></script>
+    <script src="script.js"></script>
 
-   <script src="script.js"></script>
 </body>
 </html>

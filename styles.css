@@ -270,3 +270,261 @@ button{
 .blur {
     filter: blur(5px);
 }
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-container {
+    text-align: center;
+}
+
+.auth-header {
+    margin-bottom: 2rem;
+}
+
+.auth-logo {
+    width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.auth-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #c70d0d;
+}
+
+.auth-header p {
+    color: #888;
+    font-size: 1rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-group i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+input {
+    width: 90%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border: 2px solid #333;
+    background: #222;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+input:focus {
+    border-color: #c70d0d;
+    outline: none;
+    background: #2a2a2a;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+}
+
+.auth-btn i {
+    font-size: 1.1rem;
+}
+
+.auth-btn.google {
+    background: #fff;
+    color: #333;
+}
+
+.google-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.auth-btn.register {
+    background: transparent;
+    border: 2px solid #c70d0d;
+    color: #c70d0d;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+    color: #666;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #333;
+}
+
+.divider span {
+    padding: 0 1rem;
+}
+
+/* Character Selection Styles */
+.character-modal {
+    max-width: 1000px;
+}
+
+.character-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.character-card {
+    background: linear-gradient(145deg, #2d2d2d, #1d1d1d);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.character-option.selected .character-card {
+    border-color: #c70d0d;
+    box-shadow: 0 0 20px rgba(199, 13, 13, 0.3);
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+}
+
+.character-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.character-info h3 {
+    color: #c70d0d;
+    margin-bottom: 0.5rem;
+}
+
+.character-stats {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.character-stats li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #888;
+}
+
+.character-stats i {
+    color: #c70d0d;
+}
+
+/* User Info Bar Styles */
+#userInfo {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 255);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #c70d0d;
+}
+
+.user-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: black;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.icon-btn:hover {
+    color: #c70d0d;
+}
+
+/* Hide utility class */
+.hide {
+    display: none !important;
+}
