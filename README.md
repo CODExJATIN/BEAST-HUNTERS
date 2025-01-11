@@ -48,7 +48,7 @@ We’d love to have you join the **Beast Hunters** community! 🌟 Follow these 
 
    ```bash
    # Clone the forked repository to your local machine
-   git clone https://github.com/YOUR_USERNAME/BEAST-HUNTERS.git
+   git clone https://github.com/CODExJATIN/BEAST-HUNTERS.git
    cd BEAST-HUNTERS
    ```
 
@@ -93,7 +93,7 @@ We’d love to have you join the **Beast Hunters** community! 🌟 Follow these 
 
 <img src="https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif" width="100%">
 
-## 💖 Our Contributors
+## 🥷🏻 Our Contributors
 
 <a href="https://github.com/CODExJATIN/BEAST-HUNTERS/graphs/contributors">
 <img src="https://contributors-img.web.app/image?repo=CODExJATIN/BEAST-HUNTERS"/>
@@ -102,7 +102,7 @@ We’d love to have you join the **Beast Hunters** community! 🌟 Follow these 
 
 ## 🎉 Credits
 
-**Beast Hunters** is lovingly developed by **JATIN**. 💖  
+**Beast Hunters** is developed by **JATIN**. 👨🏻‍💻  
 
 Feel free to contribute, report issues, or share your thoughts. Every bit helps us create an even more amazing game! 🌟  
 
