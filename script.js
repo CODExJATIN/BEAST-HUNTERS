@@ -125,16 +125,19 @@ function update(location) {
 function goTown() {
   update(locations[0]);
   screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  backgroundMusic.play();
 }
 
 function goStore() {
   update(locations[1]);
   screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  backgroundMusic.play();
 }
 
 function goCave() {
   update(locations[2]);
   screenMain.style.backgroundImage="url(scenes/cave.jpg)"
+  backgroundMusic.play();
 }
 
 function buyHealth() {
@@ -213,18 +216,21 @@ function sellWeapon() {
 function fightSlime() {
   fighting = 0;
   goFight();
+  backgroundMusic.pause();
   screenMain.style.backgroundImage="url(scenes/slime.jpg)"
 }
 
 function fightBeast() {
   fighting = 1;
   goFight();
+  backgroundMusic.pause();
   screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
 }
 
 function fightDragon() {
   fighting = 2;
   goFight();
+  backgroundMusic.pause();
   screenMain.style.backgroundImage="url(scenes/dragon.jpg)"
 }
 
@@ -237,6 +243,10 @@ function goFight() {
 }
 
 function attack() {
+
+    const punchSound = new Audio("punch.mp3");
+    punchSound.currentTime = 0;
+    punchSound.play();
 
     if(fighting===0){
         screenMain.style.backgroundImage="url(scenes/slime_attack.jpg)"
@@ -265,6 +275,8 @@ function attack() {
       
     } else {
       defeatMonster();
+      playWinSound();
+
     }
   }
   if (Math.random() <= .1 && inventory.length !== 1) {
@@ -298,6 +310,9 @@ function isMonsterHit() {
 }
 
 function dodge() {
+  const swooshSound = new Audio("swoosh.mp3");
+  swooshSound.currentTime = 0;
+  swooshSound.play();
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 
   if(fighting===2){
@@ -324,11 +339,13 @@ else if(fighting===1){
 function lose() {
   update(locations[5]);
   screenMain.style.backgroundImage="url(scenes/death.jpg)"
+  playLoserSound();
 }
 
 function winGame() {
   update(locations[6]);
   screenMain.style.backgroundImage="url(scenes/dragon_dead1.jpg)"
+  playWinSound();
 }
 
 function restart() {
@@ -341,6 +358,7 @@ function restart() {
   healthText.innerText = health;
   xpText.innerText = xp;
   goTown();
+  backgroundMusic.play();
 }
 
 function easterEgg() {
@@ -399,6 +417,7 @@ document.getElementById('play').addEventListener('mouseout',()=>{
 function togglePopup() {
   const popup = document.getElementById("popup");
   const mainContent = document.querySelector("#bg");
+  const playBtn = document.getElementById("play");
   
 
   if (window.innerWidth <= 768) {
@@ -415,15 +434,75 @@ function togglePopup() {
 window.onload = togglePopup;
 window.addEventListener("resize", togglePopup);
 
-//Buttton Sound Effect
-const buttons = document.querySelectorAll("button");
-
+// Button Sound Effect
+const buttons = document.querySelectorAll("#controls button");
 
 const clickSound = new Audio("click-sound.mp3");
 
 buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        clickSound.currentTime = 0; 
-        clickSound.play(); 
-    });
+  button.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  });
 });
+
+const playButton = document.getElementById("play");
+const playButtonSound = new Audio("click-sound.mp3");
+const backgroundMusic = new Audio("background-music.mp3");
+backgroundMusic.loop = true;
+
+playButton.addEventListener("click", () => {
+  playButtonSound.currentTime = 0;
+  playButtonSound.play();
+  backgroundMusic.currentTime = 0;
+  backgroundMusic.play();
+});
+
+
+const group1Sound = new Audio("click-sound.mp3");
+const group2Sound = new Audio("click-sound.mp3");
+const group3Sound = new Audio("click-sound.mp3");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const groupId = button.getAttribute("data-group-id");
+    let sound;
+    switch (groupId) {
+      case "group1":
+        sound = group1Sound;
+        break;
+      case "group2":
+        sound = group2Sound;
+        break;
+      case "group3":
+        sound = group3Sound;
+        break;
+      default:
+        sound = null;
+    }
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play();
+    }
+  });
+});
+
+// Loser sound effect
+const loserSound = new Audio("game-over.mp3");
+
+function playLoserSound() {
+  backgroundMusic.pause();
+  loserSound.currentTime = 0;
+  loserSound.play();
+}
+
+//Winner sound
+const winSound = new Audio("victory.mp3");
+
+function playWinSound() {
+  console.log("Playing")
+  backgroundMusic.pause();
+  winSound.currentTime = 0;
+  winSound.play();
+}
+
