@@ -5,6 +5,7 @@ let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["stick"];
+let times = 5;
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
@@ -92,11 +93,11 @@ const locations = [
     "button functions": [restart],
     text: "You die. ☠️"
   },
-  { 
-    name: "win", 
-    "button text": ["REPLAY?"], 
-    "button functions": [restart], 
-    text: "You defeat the dragon! YOU WIN THE GAME! 🎉" 
+  {
+    name: "win",
+    "button text": ["REPLAY?"],
+    "button functions": [restart],
+    text: "You defeat the dragon! YOU WIN THE GAME! 🎉"
   },
   {
     name: "easter egg",
@@ -140,19 +141,19 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
-  screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/Opening.jpg)"
   backgroundMusic.play();
 }
 
 function goStore() {
   update(locations[1]);
-  screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/Opening.jpg)"
   backgroundMusic.play();
 }
 
 function goCave() {
   update(locations[2]);
-  screenMain.style.backgroundImage="url(scenes/cave.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/cave.jpg)"
   backgroundMusic.play();
 }
 
@@ -162,7 +163,7 @@ function buyHealth() {
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
-    
+
     goldText.classList.add('popAnimation');
     healthText.classList.add('popAnimation');
     /*goldStat.innerText = gold;
@@ -171,6 +172,10 @@ function buyHealth() {
   } else {
     text.innerText = "You do not have enough gold to buy health.";
   }
+}
+
+function changeSelectedWeapon(msg) {
+  alert("Working fine", msg)
 }
 
 function buyWeapon() {
@@ -183,16 +188,22 @@ function buyWeapon() {
       text.innerText = "You now have a " + newWeapon + ".";
       inventory.push(newWeapon);
       text.innerText += " In your inventory you have: " + inventory;
-      if(currentWeapon===1){
+      if (currentWeapon === 1) {
+        stick.classList.remove('selectedWeapon')
         dagger.classList.remove('black-and-white')
         dagger.classList.add('normal')
+        dagger.classList.add('selectedWeapon')
       }
-      if(currentWeapon===2){
+      if (currentWeapon === 2) {
+        dagger.classList.remove('selectedWeapon')
         hammer.classList.remove('black-and-white')
         hammer.classList.add('normal')
+        hammer.classList.add('selectedWeapon')
       }
-      if(currentWeapon===3){
+      if (currentWeapon === 3) {
+        hammer.classList.remove('selectedWeapon')
         sword.classList.remove('black-and-white')
+        sword.classList.add('selectedWeapon')
         sword.classList.add('normal')
       }
     } else {
@@ -212,15 +223,18 @@ function sellWeapon() {
     let currentWeapon = inventory.shift();
     text.innerText = "You sold a " + currentWeapon + ".";
     text.innerText += " In your inventory you have: " + inventory;
-    if(currentWeapon===1){
+    if (currentWeapon === 1) {
       dagger.classList.add('black-and-white');
       dagger.classList.remove('normal');
+      stick.classList.add('selectedWeapon');
     }
-    if(currentWeapon===2){
+    if (currentWeapon === 2) {
+      dagger.classList.add('selectedWeapon');
       hammer.classList.add('black-and-white');
       hammer.classList.remove('normal');
     }
-    if(currentWeapon===3){
+    if (currentWeapon === 3) {
+      hammar.classList.add('selectedWeapon');
       sword.classList.add('black-and-white');
       sword.classList.remove('remove');
     }
@@ -233,21 +247,21 @@ function fightSlime() {
   fighting = 0;
   goFight();
   backgroundMusic.pause();
-  screenMain.style.backgroundImage="url(scenes/slime.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/slime.jpg)"
 }
 
 function fightBeast() {
   fighting = 1;
   goFight();
   backgroundMusic.pause();
-  screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/finged_beast.jpg)"
 }
 
 function fightDragon() {
   fighting = 2;
   goFight();
   backgroundMusic.pause();
-  screenMain.style.backgroundImage="url(scenes/dragon.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/dragon.jpg)"
 }
 
 function goFight() {
@@ -260,19 +274,19 @@ function goFight() {
 
 function attack() {
 
-    const punchSound = new Audio("punch.mp3");
-    punchSound.currentTime = 0;
-    punchSound.play();
+  const punchSound = new Audio("punch.mp3");
+  punchSound.currentTime = 0;
+  punchSound.play();
 
-    if(fighting===0){
-        screenMain.style.backgroundImage="url(scenes/slime_attack.jpg)"
-    }
-    else if(fighting===1){
-        screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
-    }
-    else if(fighting===2){
-        screenMain.style.backgroundImage="url(scenes/dragon_attack.jpg)"
-    }
+  if (fighting === 0) {
+    screenMain.style.backgroundImage = "url(scenes/slime_attack.jpg)"
+  }
+  else if (fighting === 1) {
+    screenMain.style.backgroundImage = "url(scenes/finged_beast.jpg)"
+  }
+  else if (fighting === 2) {
+    screenMain.style.backgroundImage = "url(scenes/dragon_attack.jpg)"
+  }
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
@@ -280,9 +294,9 @@ function attack() {
   if (health < 0) {
     health = 0; // To ensure health does not drop below zero
   }
-
+  console.log(currentWeapon);
   if (isMonsterHit()) {
-    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
+    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   } else {
     text.innerText += " You miss.";
   }
@@ -293,36 +307,42 @@ function attack() {
   } else if (monsterHealth <= 0) {
     if (fighting === 2) {
       winGame();
-      
+
     } else {
       defeatMonster();
       playWinSound();
 
     }
   }
-  if (Math.random() <= .1 && inventory.length !== 1) {
+  times--;
+  if (times == 1 && inventory.length !== 1) {
     text.innerText += " Your " + inventory.pop() + " breaks.";
-    if(currentWeapon===1){
+    if (currentWeapon === 1) {
       dagger.classList.remove('normal');
       dagger.classList.add('black-and-white');
+      stick.classList.add('selectedWeapon');
+      dagger.classList.remove('selectedWeapon');
     }
-    if(currentWeapon===2){
+    if (currentWeapon === 2) {
       hammer.classList.remove('normal');
       hammer.classList.add('black-and-white');
+      daggar.classList.add('selectedWeapon');
+      hammar.classList.remove('selectedWeapon');
     }
-    if(currentWeapon===3){
+    if (currentWeapon === 3) {
       sword.classList.remove('normal');
       sword.classList.add('black-and-white');
+      hammar.classList.add('selectedWeapon');
+      sword.classList.remove('selectedWeapon');
     }
     currentWeapon--;
-
   }
 
 }
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
-  console.log(hit);
+  console.log("Monster Attack Damage: ", hit);
   return hit > 0 ? hit : 0;
 }
 
@@ -336,8 +356,8 @@ function dodge() {
   swooshSound.play();
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 
-  if(fighting===2){
-    screenMain.style.backgroundImage="url(scenes/dragon_dodge.jpg)"
+  if (fighting === 2) {
+    screenMain.style.backgroundImage = "url(scenes/dragon_dodge.jpg)"
   }
 }
 
@@ -348,24 +368,24 @@ function defeatMonster() {
   xpText.innerText = xp;
   update(locations[4]);
 
-  if(fighting===0){
-    screenMain.style.backgroundImage="url(scenes/slime_dead.jpg)"
-}
-else if(fighting===1){
-    screenMain.style.backgroundImage="url(scenes/beast_dead1.jpg)"
-}
+  if (fighting === 0) {
+    screenMain.style.backgroundImage = "url(scenes/slime_dead.jpg)"
+  }
+  else if (fighting === 1) {
+    screenMain.style.backgroundImage = "url(scenes/beast_dead1.jpg)"
+  }
 
 }
 
 function lose() {
   update(locations[5]);
-  screenMain.style.backgroundImage="url(scenes/death.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/death.jpg)"
   playLoserSound();
 }
 
 function winGame() {
   update(locations[6]);
-  screenMain.style.backgroundImage="url(scenes/dragon_dead1.jpg)"
+  screenMain.style.backgroundImage = "url(scenes/dragon_dead1.jpg)"
   playWinSound();
 }
 
@@ -421,18 +441,18 @@ function pick(guess) {
 }
 
 
-document.getElementById('play').addEventListener('click',()=>{
+document.getElementById('play').addEventListener('click', () => {
   bg.classList.remove('bgImage');
   upperScreen.classList.remove('hide');
   playBtn.classList.add('hide');
 })
 
-document.getElementById('play').addEventListener('mouseover',()=>{
+document.getElementById('play').addEventListener('mouseover', () => {
   bg.classList.remove('basic');
   bg.classList.add('black-and-white');
 })
 
-document.getElementById('play').addEventListener('mouseout',()=>{
+document.getElementById('play').addEventListener('mouseout', () => {
   bg.classList.add('basic');
   bg.classList.remove('black-and-white');
 })
@@ -442,16 +462,16 @@ function togglePopup() {
   const popup = document.getElementById("popup");
   const mainContent = document.querySelector("#bg");
   const playBtn = document.getElementById("play");
-  
+
 
   if (window.innerWidth <= 768) {
-      popup.style.display = "flex";
-      mainContent.classList.add("blur");
-      playBtn.classList.add("blur");
+    popup.style.display = "flex";
+    mainContent.classList.add("blur");
+    playBtn.classList.add("blur");
   } else {
-      popup.style.display = "none";
-      mainContent.classList.remove("blur");
-      playBtn.classList.remove("blur");
+    popup.style.display = "none";
+    mainContent.classList.remove("blur");
+    playBtn.classList.remove("blur");
   }
 }
 
