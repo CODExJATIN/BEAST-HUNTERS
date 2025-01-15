@@ -2,31 +2,31 @@
 
 
 
-body{
+body {
     background-color: #0a0a23;
     height: 100vh;
-    width:100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family:"Josefin Sans",sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     margin: 0;
     padding: 0;
-    
+
 }
 
-.upperScreen{
+.upperScreen {
     height: 100vh;
     width: 100%;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
-    
+
 
 }
 
-.myInventory{
+.myInventory {
     animation: popOut 0.5s ease-in-out;
     width: 200px;
     background-color: #feac32;
@@ -38,21 +38,21 @@ body{
 
     padding-left: 10px;
     padding-right: 10px;
-    
+
 
     border-radius: 50px;
 
-  
+
 
     font-family: "Honk", sans-serif;
 
 
 }
 
-.logoImage{
-    
+.logoImage {
+
     width: 100%;
-    display:flex;
+    display: flex;
     justify-content: space-evenly;
     align-items: center;
 
@@ -61,21 +61,31 @@ body{
     margin-bottom: 10px;
 }
 
-.weapon{
+.weapon {
     height: 80px;
     width: 80px;
     border-radius: 5px;
-   
 }
 
-#weaponImages{
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   justify-content: center;;
+.selectedWeapon {
+    border: 3px solid #ff5900;
+    border-radius: 8px;
+    filter: brightness(1.2);
+    box-shadow:
+        0 0 10px rgba(255, 215, 0, 0.5),
+        0 0 20px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.myStats{
+#weaponImages {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    ;
+}
+
+.myStats {
     animation: popOut 0.5s ease-in-out;
     font-family: "Honk", sans-serif;
     background-color: #feac32;
@@ -91,28 +101,29 @@ body{
     padding-top: 10px;
     padding-bottom: 10px;
 
-    height:80vh;
-    width:200px;
+    height: 80vh;
+    width: 200px;
 
-    
+
 }
-.mainScreen{
+
+.mainScreen {
     height: 60vh;
     background-color: #0a0a23;
     background-image: url(scenes/Opening.jpg);
-    background-size:cover;
+    background-size: cover;
     border-radius: 10px;
-   
+
 }
 
-#text{
+#text {
     background-color: #0a0a23;
     color: #ffffff;
     padding: 10px 10px 10px 10px;
-    
+
 }
 
-#game{
+#game {
     /*max-width: 500px;
     max-height: 400px;*/
     width: 100%;
@@ -126,71 +137,74 @@ body{
 
 }
 
-#controls,#stats{
-    border:1px solid #0a0a23;
+#controls,
+#stats {
+    border: 1px solid #0a0a23;
     color: #0a0a23;
     padding: 5px;
-    
-    
+
+
 }
 
 
 
-#button1{
-    font-family:"Josefin Sans",sans-serif;
-}
-#button2{
-    font-family:"Josefin Sans",sans-serif;
-}
-#button3{
-    font-family:"Josefin Sans",sans-serif;
+#button1 {
+    font-family: "Josefin Sans", sans-serif;
 }
 
-#monsterStats{
+#button2 {
+    font-family: "Josefin Sans", sans-serif;
+}
+
+#button3 {
+    font-family: "Josefin Sans", sans-serif;
+}
+
+#monsterStats {
     display: none;
-    border:1px solid #0a0a23;
+    border: 1px solid #0a0a23;
     color: #ffffff;
-    background:#c70d0d;
+    background: #c70d0d;
     padding: 5px;
 }
 
-.stat{
+.stat {
     padding-right: 10px;
 }
 
-button{
+button {
     cursor: pointer;
     color: #0a0a23;
-    background-color:#feac32;
-    background-image: linear-gradient(#fecc4c,#ffac33);
+    background-color: #feac32;
+    background-image: linear-gradient(#fecc4c, #ffac33);
     border: 3px solid #feac32;
 }
 
-.black-and-white{
+.black-and-white {
     filter: grayscale(100%);
     transition: filter 0.5s ease-in-out;
 }
 
-.normal{
+.normal {
     filter: grayscale(0%);
     transition: filter 0.5s ease-in-out;
     animation: popOut 0.5s ease-in-out;
 }
 
-.statText{
+.statText {
     font-size: 35px;
     animation: popOut 0.5s ease-in-out;
 }
 
-.popAnimation{
+.popAnimation {
     animation: popOut 0.5s ease-in-out;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-.bgImage{
+.bgImage {
     margin: 0;
     padding: 0;
     background-image: url('scenes/Opening.jpg');
@@ -201,35 +215,37 @@ button{
     align-items: center;
     justify-content: center;
     background-position: center;
-    
+
 }
 
-#play{
+#play {
 
     position: absolute;
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-   
+
     width: 180px;
     height: 60px;
-    font-family: 'Honk',sans-serif;
+    font-family: 'Honk', sans-serif;
     font-size: 40px;
 }
 
-#play:hover{
+#play:hover {
     background-color: #b16b02;
 }
 
 @keyframes popOut {
     0% {
-      transform: scale(1);
+        transform: scale(1);
     }
+
     50% {
-      transform: scale(1.2);
+        transform: scale(1.2);
     }
+
     100% {
-      transform: scale(1);
+        transform: scale(1);
     }
 }
 
@@ -257,15 +273,15 @@ button{
     z-index: 1001;
 }
 
-#popupContent h2{
-    color:#fecc4c;
+#popupContent h2 {
+    color: #fecc4c;
 }
 
 .popupImage {
     width: 100%;
-    max-width: 300px; 
-    border-radius: 15px; 
-    margin-top: 20px; 
+    max-width: 300px;
+    border-radius: 15px;
+    margin-top: 20px;
 }
 
 

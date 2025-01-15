@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 </head>
+
 <body>
     <!-- Auth Modal -->
     <div id="authModal" class="modal">
@@ -53,7 +55,7 @@
                 <h2>Choose Your Champion</h2>
                 <p>Select your character to begin the adventure</p>
             </div>
-            
+
             <div class="character-grid">
                 <div class="character-option" data-character="warrior">
                     <div class="character-card">
@@ -119,33 +121,37 @@
     </div>
 
     <div class="bgImage" id="bg">
-        
+
     </div>
     <button id="play">PLAY</button>
 
-    
+
 
     <div class="upperScreen hide" id="upperScreen">
 
         <div class="myInventory">
             <h1 style="color:#c70d0d">Inventory</h1>
             <div id="weaponImages">
-                <div class="logoImage" id="stick">
-                    <img class="weapon" src="weapons/stick.jpeg" alt="stick"><p>Stick</p>
+                <div class="logoImage selectedWeapon" id="stick">
+                    <img class="weapon" src="weapons/stick.jpeg" alt="stick">
+                    <p>Stick</p>
                 </div>
-                
+
                 <div class="logoImage black-and-white" id="dagger">
-                    <img class="weapon " src="weapons/dagger.jpeg" alt="stick"><p>Dagger</p>
+                    <img class="weapon " src="weapons/dagger.jpeg" alt="stick">
+                    <p>Dagger</p>
                 </div>
 
                 <div class="logoImage black-and-white" id="hammer">
-                    <img class="weapon" src="weapons/hammer.jpeg" alt="stick"><p>Hammer</p>
+                    <img class="weapon" src="weapons/hammer.jpeg" alt="stick">
+                    <p>Hammer</p>
                 </div>
-                
+
                 <div class="logoImage black-and-white" id="sword">
-                    <img class="weapon" src="weapons/sword.jpeg" alt="stick"><p>Sword</p>
+                    <img class="weapon" src="weapons/sword.jpeg" alt="stick">
+                    <p>Sword</p>
                 </div>
-                
+
             </div>
         </div>
         <div style="width: 50%;">
@@ -168,11 +174,13 @@
                     <span class="stat">Health: <strong><span id="monsterHealth"></span>
                 </div>
                 <div id="text">
-                    Welcome to Beast Hunters:Beyond the Dragon's reach. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.
+                    Welcome to Beast Hunters:Beyond the Dragon's reach. You must defeat the dragon that is preventing
+                    people from leaving the town. You are in the town square. Where do you want to go? Use the buttons
+                    above.
                 </div>
-               </div> 
+            </div>
         </div>
-        
+
 
         <div class="myStats">
             <h1>Stats</h1>
@@ -180,30 +188,31 @@
                 <p>XP: <strong><span id="xpText">0</span></strong></p>
                 <p>Health: <strong><span id="healthText">100</span></strong> </p>
                 <p>Gold: <strong>
-                    <span id="goldText">50</span>
-                </strong> </p>
+                        <span id="goldText">50</span>
+                    </strong> </p>
             </div>
-                
+
 
             <div id="text"></div>
         </div>
-        
+
     </div>
-    
+
 
     <div id="popup">
         <div id="popupContent">
 
             <h2>👀 Oops! Looks like our game is feeling a bit shy!</h2>
 
-            <img src="https://th.bing.com/th/id/OIG2.DRI.RXlFW_7YaUaOTu3J?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Warrior Apologising" class="popupImage">
-            
-        <p>We’re currently not available on mobile screens. Please switch to a desktop for the full adventure!</p>
+            <img src="https://th.bing.com/th/id/OIG2.DRI.RXlFW_7YaUaOTu3J?w=1024&h=1024&rs=1&pid=ImgDetMain"
+                alt="Warrior Apologising" class="popupImage">
+
+            <p>We’re currently not available on mobile screens. Please switch to a desktop for the full adventure!</p>
 
         </div>
     </div>
-    
-    
+
+
     <script type="module" src="auth.js"></script>
     <script type="module" src="firebase-app.js"></script>
     <script type="module" src="firebase-auth.js"></script>
@@ -211,4 +220,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>

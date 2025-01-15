@@ -11,16 +11,7 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
-};
+import firebaseConfig from "./config.js";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
