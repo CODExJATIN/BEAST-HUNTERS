@@ -1,6 +1,6 @@
 # Beast Hunters
 
-<img height="200px" src="scenes/Opening.jpg">
+<img height="200px" src="public/assets/scenes/Opening.jpg">
 
 ## Overview
 
