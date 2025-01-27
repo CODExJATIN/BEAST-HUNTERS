@@ -1,5 +1,4 @@
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { initializeApp } from "firebase/app";
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -8,23 +7,26 @@ import {
     GoogleAuthProvider,
     onAuthStateChanged,
     updateProfile,
-    signOut
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    signOut,
+} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
 
 // DOM Elements
 const emailInput = document.getElementById("email");
@@ -37,6 +39,8 @@ const displayUsername = document.getElementById("displayUsername");
 const userAvatar = document.getElementById("userAvatar");
 const userInfo = document.getElementById("userInfo");
 const authModal = document.getElementById("authModal");
+const editUsernameBtn = document.getElementById("editUsernameBtn");
+
 
 // Event: Login
 loginBtn?.addEventListener("click", async () => {
@@ -129,14 +133,17 @@ function updateUI(user) {
 
         // Update user profile details
         displayUsername.textContent = user.displayName || user.email;
-        userAvatar.src = user.photoURL || "beast-hunter-user.jpg";
+        userAvatar.src = user.photoURL || "/assets/images/beast-hunter-user.jpg";
     }
 }
 
 // Reset UI on logout
 function resetUI() {
     displayUsername.textContent = "";
-    userAvatar.src = "beast-hunter-user.jpg";
+    userAvatar.src = "/assets/images/beast-hunter-user.jpg";
     userInfo?.classList.add("hide");
     authModal?.classList.remove("hide");
 }
+
+
+

@@ -1,3 +1,7 @@
+import { auth } from "./auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { addOrUpdateUserStats } from "./updateData";
+
 let xp = 0;
 let health = 100;
 let gold = 50;
@@ -20,6 +24,22 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 const upperScreen = document.querySelector('#upperScreen');
 const bg = document.querySelector('#bg');
 const playBtn = document.querySelector('#play');
+
+let userId = auth.currentUser ? auth.currentUser.uid : null;
+let userName = auth.currentUser ? auth.currentUser.displayName : "Player";  // Fallback if the name is not set
+let userEmail = auth.currentUser ? auth.currentUser.email : "";  // Get email from Firebase
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log("User is logged in:", user);
+        userId = user.uid;
+        userEmail=user.email;
+        userName= user.displayName;
+
+    } else {
+        console.log("No user is logged in");
+    }
+});
 
 //const xpStat = document.getElementById('xpStat');
 //const healthStat = document.getElementById('healthStat');  //will think about it later
@@ -140,19 +160,19 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
-  screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/Opening.jpg)"
   backgroundMusic.play();
 }
 
 function goStore() {
   update(locations[1]);
-  screenMain.style.backgroundImage="url(scenes/Opening.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/Opening.jpg)"
   backgroundMusic.play();
 }
 
 function goCave() {
   update(locations[2]);
-  screenMain.style.backgroundImage="url(scenes/cave.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/cave.jpg)"
   backgroundMusic.play();
 }
 
@@ -233,21 +253,21 @@ function fightSlime() {
   fighting = 0;
   goFight();
   backgroundMusic.pause();
-  screenMain.style.backgroundImage="url(scenes/slime.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/slime.jpg)"
 }
 
 function fightBeast() {
   fighting = 1;
   goFight();
   backgroundMusic.pause();
-  screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/finged_beast.jpg)"
 }
 
 function fightDragon() {
   fighting = 2;
   goFight();
   backgroundMusic.pause();
-  screenMain.style.backgroundImage="url(scenes/dragon.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/dragon.jpg)"
 }
 
 function goFight() {
@@ -260,18 +280,18 @@ function goFight() {
 
 function attack() {
 
-    const punchSound = new Audio("punch.mp3");
+    const punchSound = new Audio("/assets/sounds/punch.mp3");
     punchSound.currentTime = 0;
     punchSound.play();
 
     if(fighting===0){
-        screenMain.style.backgroundImage="url(scenes/slime_attack.jpg)"
+        screenMain.style.backgroundImage="url(/assets/scenes/slime_attack.jpg)"
     }
     else if(fighting===1){
-        screenMain.style.backgroundImage="url(scenes/finged_beast.jpg)"
+        screenMain.style.backgroundImage="url(/assets/scenes/finged_beast.jpg)"
     }
     else if(fighting===2){
-        screenMain.style.backgroundImage="url(scenes/dragon_attack.jpg)"
+        screenMain.style.backgroundImage="url(/assets/scenes/dragon_attack.jpg)"
     }
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
@@ -331,13 +351,13 @@ function isMonsterHit() {
 }
 
 function dodge() {
-  const swooshSound = new Audio("swoosh.mp3");
+  const swooshSound = new Audio("/assets/sounds/swoosh.mp3");
   swooshSound.currentTime = 0;
   swooshSound.play();
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 
   if(fighting===2){
-    screenMain.style.backgroundImage="url(scenes/dragon_dodge.jpg)"
+    screenMain.style.backgroundImage="url(/assets/scenes/dragon_dodge.jpg)"
   }
 }
 
@@ -349,24 +369,51 @@ function defeatMonster() {
   update(locations[4]);
 
   if(fighting===0){
-    screenMain.style.backgroundImage="url(scenes/slime_dead.jpg)"
+    screenMain.style.backgroundImage="url(/assets/scenes/slime_dead.jpg)"
 }
 else if(fighting===1){
-    screenMain.style.backgroundImage="url(scenes/beast_dead1.jpg)"
+    screenMain.style.backgroundImage="url(/assets/scenes/beast_dead1.jpg)"
+}
+
+// Increment monster kills
+if (userId) {
+  addOrUpdateUserStats(userId, {
+    name: userName,
+    email: userEmail,
+    monsterKills: 1,  // Increment monster kills by 1
+  });
 }
 
 }
 
 function lose() {
   update(locations[5]);
-  screenMain.style.backgroundImage="url(scenes/death.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/death.jpg)"
   playLoserSound();
+
+  // Increment deaths
+  if (userId) {
+    addOrUpdateUserStats(userId, {
+      name: userName,
+      email: userEmail,
+      deaths: 1,  // Increment deaths by 1
+    });
+  }
 }
 
 function winGame() {
   update(locations[6]);
-  screenMain.style.backgroundImage="url(scenes/dragon_dead1.jpg)"
+  screenMain.style.backgroundImage="url(/assets/scenes/dragon_dead1.jpg)"
   playWinSound();
+
+  // Increment dragon kills
+  if (userId) {
+    addOrUpdateUserStats(userId, {
+      name: userName,
+      email: userEmail,
+      dragonKills: 1,  // Increment dragon kills by 1
+    });
+  }
 }
 
 function restart() {
@@ -421,7 +468,7 @@ function pick(guess) {
 }
 
 
-document.getElementById('play').addEventListener('click',()=>{
+document.getElementById('play').addEventListener('click',async ()=>{
   bg.classList.remove('bgImage');
   upperScreen.classList.remove('hide');
   playBtn.classList.add('hide');
@@ -461,7 +508,7 @@ window.addEventListener("resize", togglePopup);
 // Button Sound Effect
 const buttons = document.querySelectorAll("#controls button");
 
-const clickSound = new Audio("click-sound.mp3");
+const clickSound = new Audio("/assets/sounds/click-sound.mp3");
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
@@ -471,8 +518,8 @@ buttons.forEach(button => {
 });
 
 const playButton = document.getElementById("play");
-const playButtonSound = new Audio("click-sound.mp3");
-const backgroundMusic = new Audio("background-music.mp3");
+const playButtonSound = new Audio("/assets/sounds/click-sound.mp3");
+const backgroundMusic = new Audio("/assets/sounds/background-music.mp3");
 backgroundMusic.loop = true;
 
 playButton.addEventListener("click", () => {
@@ -483,9 +530,9 @@ playButton.addEventListener("click", () => {
 });
 
 
-const group1Sound = new Audio("click-sound.mp3");
-const group2Sound = new Audio("click-sound.mp3");
-const group3Sound = new Audio("click-sound.mp3");
+const group1Sound = new Audio("/assets/sounds/click-sound.mp3");
+const group2Sound = new Audio("/assets/sounds/click-sound.mp3");
+const group3Sound = new Audio("/assets/sounds/click-sound.mp3");
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
@@ -512,7 +559,7 @@ buttons.forEach(button => {
 });
 
 // Loser sound effect
-const loserSound = new Audio("game-over.mp3");
+const loserSound = new Audio("/assets/sounds/game-over.mp3");
 
 function playLoserSound() {
   backgroundMusic.pause();
@@ -521,7 +568,7 @@ function playLoserSound() {
 }
 
 //Winner sound
-const winSound = new Audio("victory.mp3");
+const winSound = new Audio("/assets/sounds/victory.mp3");
 
 function playWinSound() {
   console.log("Playing")
@@ -529,4 +576,5 @@ function playWinSound() {
   winSound.currentTime = 0;
   winSound.play();
 }
+
 
